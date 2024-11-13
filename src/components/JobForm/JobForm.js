@@ -8,28 +8,40 @@ const JobForm = ({ job = {}, onSave, onCancel }) => {
   const [salaryRange, setSalaryRange] = useState(job.salaryRange || '');
   const [status, setStatus] = useState(job.status || '');
   const [notes, setNotes] = useState(job.notes || '');
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    setCompany(job.company || '');
-    setPosition(job.position || '');
-    setSalaryRange(job.salaryRange || '');
-    setStatus(job.status || '');
-    setNotes(job.notes || '');
+    if (job) {
+      setCompany(job.company || '');
+      setPosition(job.position || '');
+      setSalaryRange(job.salaryRange || '');
+      setStatus(job.status || '');
+      setNotes(job.notes || '');
+    }
   }, [job]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const jobData = { company, position, salaryRange, status, notes };
-    if (job._id) {
-      await axios.put(`/api/jobs/${job._id}`, jobData);
-    } else {
-      await axios.post('/api/jobs', jobData);
+
+    try {
+      if (job._id) {
+        // Обновление существующей записи
+        await axios.put(`/api/jobs/${job._id}`, jobData);
+      } else {
+        // Создание новой записи
+        await axios.post('/api/jobs', jobData);
+      }
+      onSave();
+    } catch (error) {
+      console.error('Failed to save job:', error);
+      setError('Failed to save job. Please try again.');
     }
-    onSave();
   };
 
   return (
     <form onSubmit={handleSubmit} className={styles.formContainer}>
+      {error && <p className={styles.error}>{error}</p>}
       <div className={styles.formGroup}>
         <label className={styles.label}>Company:</label>
         <input
@@ -77,16 +89,15 @@ const JobForm = ({ job = {}, onSave, onCancel }) => {
         ></textarea>
       </div>
       <div className={styles.buttonGroup}>
-        <button 
-        type="submit" 
-        className={styles.button}>
-        Save
+        <button type="submit" className={styles.button}>
+          Save
         </button>
-        <button 
-        type="button" 
-        onClick={onCancel} 
-        className={`${styles.button} ${styles.cancelButton}`}>
-        Cancel
+        <button
+          type="button"
+          onClick={onCancel}
+          className={`${styles.button} ${styles.cancelButton}`}
+        >
+          Cancel
         </button>
       </div>
     </form>

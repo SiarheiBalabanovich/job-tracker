@@ -18,7 +18,6 @@ mongoose.connect('mongodb+srv://sbalabanovichdeveloper:dUUjbL0Mwy8HIjeC@cluster0
     console.error('Failed to connect to MongoDB', err);
   });
 
-// схема и модель для вакансий
 const jobSchema = new mongoose.Schema({
   company: String,
   position: String,
@@ -36,6 +35,7 @@ router.get('/api/jobs', async (ctx) => {
   } catch (error) {
     ctx.status = 500;
     ctx.body = { message: 'Failed to fetch jobs', error: error.message };
+    console.error('GET /api/jobs error:', error);
   }
 });
 
@@ -48,6 +48,7 @@ router.post('/api/jobs', async (ctx) => {
   } catch (error) {
     ctx.status = 500;
     ctx.body = { message: 'Failed to create job', error: error.message };
+    console.error('POST /api/jobs error:', error);
   }
 });
 
@@ -63,6 +64,7 @@ router.put('/api/jobs/:id', async (ctx) => {
   } catch (error) {
     ctx.status = 500;
     ctx.body = { message: 'Failed to update job', error: error.message };
+    console.error('PUT /api/jobs/:id error:', error);
   }
 });
 
@@ -78,6 +80,7 @@ router.delete('/api/jobs/:id', async (ctx) => {
   } catch (error) {
     ctx.status = 500;
     ctx.body = { message: 'Failed to delete job', error: error.message };
+    console.error('DELETE /api/jobs/:id error:', error);
   }
 });
 

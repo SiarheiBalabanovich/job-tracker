@@ -5,6 +5,7 @@ export default async function handler(req, res) {
 
     try {
         if (method === 'PUT') {
+            // Обработка PUT
             const response = await fetch(baseUrl, {
                 method: 'PUT',
                 headers: {
@@ -13,8 +14,13 @@ export default async function handler(req, res) {
                 body: JSON.stringify(req.body),
             });
             const data = await response.json();
-            res.status(200).json(data);
+            if (response.ok) {
+                res.status(200).json(data);
+            } else {
+                res.status(500).json({ error: 'Failed to update job' });
+            }
         } else if (method === 'DELETE') {
+            // Обработка DELETE
             const response = await fetch(baseUrl, {
                 method: 'DELETE',
             });
@@ -24,10 +30,12 @@ export default async function handler(req, res) {
                 res.status(500).json({ error: 'Failed to delete job' });
             }
         } else {
+            // Метод не поддерживается
             res.setHeader('Allow', ['PUT', 'DELETE']);
             res.status(405).end(`Method ${method} Not Allowed`);
         }
     } catch (error) {
+        console.error(`Error in handler for ${method} /api/jobs/${id}:`, error);
         res.status(500).json({ error: 'Failed to connect to Koa server' });
     }
 }
