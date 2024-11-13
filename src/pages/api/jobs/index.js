@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Job from './models/Job'; // предполагаем, что модель находится в models/Job.js
+import Job from '../../../models/Job';
 
 export default async function handler(req, res) {
     const { method } = req;
