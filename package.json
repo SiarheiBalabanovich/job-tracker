@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
+  "dev": "next dev",
+  "build": "next build",
+  "start": "NODE_ENV=production npm install --omit=dev && next start",
+  "lint": "next lint"
+},
   "dependencies": {
     "@koa/cors": "^5.0.0",
     "axios": "^1.7.7",
