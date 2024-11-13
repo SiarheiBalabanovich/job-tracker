@@ -1,49 +1,31 @@
+import mongoose from 'mongoose';
+import Job from './models/Job'; // предполагаем, что модель находится в models/Job.js
+
 export default async function handler(req, res) {
     const { method } = req;
     const { id } = req.query;
-    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-
-    // Проверка, что переменная окружения установлена
-    if (!baseUrl) {
-        console.error('Ошибка: NEXT_PUBLIC_API_BASE_URL не задана');
-        return res.status(500).json({ error: 'Server configuration error' });
-    }
-
-    const url = `${baseUrl}/api/jobs/${id}`;
 
     try {
         if (method === 'PUT') {
-            // Обработка PUT
-            const response = await fetch(url, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(req.body),
-            });
-            const data = await response.json();
-            if (response.ok) {
-                res.status(200).json(data);
+            const updatedJob = await Job.findByIdAndUpdate(id, req.body, { new: true });
+            if (!updatedJob) {
+                res.status(404).json({ error: 'Job not found' });
             } else {
-                res.status(500).json({ error: 'Failed to update job' });
+                res.status(200).json(updatedJob);
             }
         } else if (method === 'DELETE') {
-            // Обработка DELETE
-            const response = await fetch(url, {
-                method: 'DELETE',
-            });
-            if (response.ok) {
-                res.status(204).end();
+            const deletedJob = await Job.findByIdAndDelete(id);
+            if (!deletedJob) {
+                res.status(404).json({ error: 'Job not found' });
             } else {
-                res.status(500).json({ error: 'Failed to delete job' });
+                res.status(204).end();
             }
         } else {
-            // Метод не поддерживается
             res.setHeader('Allow', ['PUT', 'DELETE']);
             res.status(405).end(`Method ${method} Not Allowed`);
         }
     } catch (error) {
         console.error(`Error in handler for ${method} /api/jobs/${id}:`, error);
-        res.status(500).json({ error: 'Failed to connect to Koa server' });
+        res.status(500).json({ error: 'Failed to process request' });
     }
 }

@@ -28,9 +28,10 @@ const jobSchema = new mongoose.Schema({
 
 const Job = mongoose.model('Job', jobSchema);
 
+// Получение списка работ с ограничением и использованием lean для оптимизации памяти
 router.get('/api/jobs', async (ctx) => {
   try {
-    const jobs = await Job.find();
+    const jobs = await Job.find().limit(10).lean(); // Ограничение на 10 записей и упрощение объекта
     ctx.body = jobs;
   } catch (error) {
     ctx.status = 500;
@@ -39,6 +40,7 @@ router.get('/api/jobs', async (ctx) => {
   }
 });
 
+// Создание новой записи
 router.post('/api/jobs', async (ctx) => {
   try {
     const newJob = new Job(ctx.request.body);
@@ -52,9 +54,10 @@ router.post('/api/jobs', async (ctx) => {
   }
 });
 
+// Обновление записи по ID
 router.put('/api/jobs/:id', async (ctx) => {
   try {
-    const job = await Job.findByIdAndUpdate(ctx.params.id, ctx.request.body, { new: true });
+    const job = await Job.findByIdAndUpdate(ctx.params.id, ctx.request.body, { new: true }).lean(); // Добавляем lean для оптимизации
     if (!job) {
       ctx.status = 404;
       ctx.body = { message: 'Job not found' };
@@ -68,9 +71,10 @@ router.put('/api/jobs/:id', async (ctx) => {
   }
 });
 
+// Удаление записи по ID
 router.delete('/api/jobs/:id', async (ctx) => {
   try {
-    const job = await Job.findByIdAndDelete(ctx.params.id);
+    const job = await Job.findByIdAndDelete(ctx.params.id).lean(); // Добавляем lean для оптимизации
     if (!job) {
       ctx.status = 404;
       ctx.body = { message: 'Job not found' };

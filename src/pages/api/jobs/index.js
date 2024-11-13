@@ -1,33 +1,23 @@
-import axios from 'axios';
+import mongoose from 'mongoose';
+import Job from './models/Job'; // предполагаем, что модель находится в models/Job.js
 
 export default async function handler(req, res) {
     const { method } = req;
-    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-
-    // Проверка, что переменная окружения установлена
-    if (!baseUrl) {
-        console.error('Ошибка: NEXT_PUBLIC_API_BASE_URL не задана');
-        return res.status(500).json({ error: 'Server configuration error' });
-    }
-
-    const url = `${baseUrl}/api/jobs`;
 
     try {
         if (method === 'GET') {
-            // Обработка GET
-            const response = await axios.get(url);
-            res.status(200).json(response.data);
+            const jobs = await Job.find();
+            res.status(200).json(jobs);
         } else if (method === 'POST') {
-            // Обработка POST
-            const response = await axios.post(url, req.body);
-            res.status(201).json(response.data);
+            const newJob = new Job(req.body);
+            await newJob.save();
+            res.status(201).json(newJob);
         } else {
-            // метод не поддерживается
             res.setHeader('Allow', ['GET', 'POST']);
             res.status(405).end(`Method ${method} Not Allowed`);
         }
     } catch (error) {
         console.error(`Error in ${method} /api/jobs:`, error);
-        res.status(500).json({ error: 'Failed to connect to Koa server' });
+        res.status(500).json({ error: 'Failed to process request' });
     }
 }
