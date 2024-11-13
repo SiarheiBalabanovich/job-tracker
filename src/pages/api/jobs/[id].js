@@ -1,12 +1,20 @@
 export default async function handler(req, res) {
     const { method } = req;
     const { id } = req.query;
-    const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/jobs/${id}`;
+    const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+    // Проверка, что переменная окружения установлена
+    if (!baseUrl) {
+        console.error('Ошибка: NEXT_PUBLIC_API_BASE_URL не задана');
+        return res.status(500).json({ error: 'Server configuration error' });
+    }
+
+    const url = `${baseUrl}/api/jobs/${id}`;
 
     try {
         if (method === 'PUT') {
             // Обработка PUT
-            const response = await fetch(baseUrl, {
+            const response = await fetch(url, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -21,7 +29,7 @@ export default async function handler(req, res) {
             }
         } else if (method === 'DELETE') {
             // Обработка DELETE
-            const response = await fetch(baseUrl, {
+            const response = await fetch(url, {
                 method: 'DELETE',
             });
             if (response.ok) {
