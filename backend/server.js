@@ -10,14 +10,13 @@ const router = new Router();
 app.use(cors({ origin: '*' }));
 app.use(bodyParser());
 
-mongoose.connect('mongodb+srv://sbalabanovichdeveloper:dUUjbL0Mwy8HIjeC@cluster0.3bjrh.mongodb.net/?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => {
-  console.log('Connected to MongoDB');
-}).catch((err) => {
-  console.error('Failed to connect to MongoDB', err);
-});
+mongoose.connect('mongodb+srv://sbalabanovichdeveloper:dUUjbL0Mwy8HIjeC@cluster0.3bjrh.mongodb.net/?retryWrites=true&w=majority')
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((err) => {
+    console.error('Failed to connect to MongoDB', err);
+  });
 
 // схема и модель для вакансий
 const jobSchema = new mongoose.Schema({
