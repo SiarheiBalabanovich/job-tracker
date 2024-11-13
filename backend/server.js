@@ -11,8 +11,6 @@ app.use(cors({ origin: '*' }));
 app.use(bodyParser());
 
 mongoose.connect('mongodb+srv://sbalabanovichdeveloper:dUUjbL0Mwy8HIjeC@cluster0.3bjrh.mongodb.net/?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
   serverSelectionTimeoutMS: 30000, // 30 секунд для выбора сервера
   socketTimeoutMS: 60000, // 60 секунд для сокета
 })
