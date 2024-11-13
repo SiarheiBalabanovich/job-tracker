@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
     const { method } = req;
-    const baseUrl = 'https://job-tracker-production-dbb8.up.railway.app';
+    const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/jobs`;
 
     try {
         if (method === 'GET') {
