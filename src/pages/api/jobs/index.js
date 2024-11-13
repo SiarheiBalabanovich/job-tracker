@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
     const { method } = req;
-    const baseUrl = 'http://localhost:4000/api/jobs';
+    const baseUrl = 'https://job-tracker-production-dbb8.up.railway.app';
 
     try {
         if (method === 'GET') {
