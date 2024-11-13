@@ -10,7 +10,12 @@ const router = new Router();
 app.use(cors({ origin: '*' }));
 app.use(bodyParser());
 
-mongoose.connect('mongodb+srv://sbalabanovichdeveloper:dUUjbL0Mwy8HIjeC@cluster0.3bjrh.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://sbalabanovichdeveloper:dUUjbL0Mwy8HIjeC@cluster0.3bjrh.mongodb.net/?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 20000, // 20 секунд
+  socketTimeoutMS: 45000, // 45 секунд
+})
   .then(() => {
     console.log('Connected to MongoDB');
   })
@@ -31,7 +36,7 @@ const Job = mongoose.model('Job', jobSchema);
 // Получение списка работ с ограничением и использованием lean для оптимизации памяти
 router.get('/api/jobs', async (ctx) => {
   try {
-    const jobs = await Job.find().limit(10).lean(); // Ограничение на 10 записей и упрощение объекта
+    const jobs = await Job.find().limit(10).lean(); // Ограничиваем количество записей до 10 и облегчаем данные
     ctx.body = jobs;
   } catch (error) {
     ctx.status = 500;
