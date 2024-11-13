@@ -1,11 +1,10 @@
 export default async function handler(req, res) {
     const { method } = req;
     const { id } = req.query;
-    const baseUrl = `http://localhost:4000/api/jobs/${id}`;
+    const baseUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/jobs/${id}`;
 
     try {
         if (method === 'PUT') {
-            // Обработка PUT
             const response = await fetch(baseUrl, {
                 method: 'PUT',
                 headers: {
@@ -16,7 +15,6 @@ export default async function handler(req, res) {
             const data = await response.json();
             res.status(200).json(data);
         } else if (method === 'DELETE') {
-            // Обработка DELETE
             const response = await fetch(baseUrl, {
                 method: 'DELETE',
             });
@@ -26,7 +24,6 @@ export default async function handler(req, res) {
                 res.status(500).json({ error: 'Failed to delete job' });
             }
         } else {
-            // Если метод не поддерживается
             res.setHeader('Allow', ['PUT', 'DELETE']);
             res.status(405).end(`Method ${method} Not Allowed`);
         }
