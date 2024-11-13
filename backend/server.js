@@ -13,8 +13,8 @@ app.use(bodyParser());
 mongoose.connect('mongodb+srv://sbalabanovichdeveloper:dUUjbL0Mwy8HIjeC@cluster0.3bjrh.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  serverSelectionTimeoutMS: 20000, // 20 секунд
-  socketTimeoutMS: 45000, // 45 секунд
+  serverSelectionTimeoutMS: 30000, // 30 секунд для выбора сервера
+  socketTimeoutMS: 60000, // 60 секунд для сокета
 })
   .then(() => {
     console.log('Connected to MongoDB');
