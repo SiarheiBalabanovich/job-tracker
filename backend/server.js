@@ -10,9 +10,9 @@ const router = new Router();
 app.use(cors({ origin: '*' }));
 app.use(bodyParser());
 
-mongoose.connect('mongodb+srv://sbalabanovichdeveloper:k_SZTrLzK6e3Zsf@cluster0.3bjrh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
-  serverSelectionTimeoutMS: 30000, // 30 секунд для выбора сервера
-  socketTimeoutMS: 60000, // 60 секунд для сокета
+mongoose.connect(process.env.MONGODB_URI, {
+  serverSelectionTimeoutMS: 30000,
+  socketTimeoutMS: 60000,
 })
   .then(() => {
     console.log('Connected to MongoDB');
