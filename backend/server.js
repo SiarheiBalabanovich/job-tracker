@@ -14,8 +14,10 @@ app.use(cors({ origin: '*' }));
 app.use(bodyParser());
 
 mongoose.connect(process.env.MONGODB_URI, {
-  serverSelectionTimeoutMS: 30000,
-  socketTimeoutMS: 60000,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
 })
   .then(() => {
     console.log('Connected to MongoDB');

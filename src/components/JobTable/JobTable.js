@@ -2,13 +2,15 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import styles from './JobTable.module.css';
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 const JobTable = ({ onEdit }) => {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
-        const response = await axios.get('/api/jobs');
+        const response = await axios.get(`${API_BASE_URL}/api/jobs`);
         setJobs(response.data);
       } catch (error) {
         console.error('Failed to fetch jobs:', error);
@@ -19,11 +21,11 @@ const JobTable = ({ onEdit }) => {
 
   const deleteJob = async (id) => {
     try {
-      await axios.delete(`/api/jobs/${id}`);
+      await axios.delete(`${API_BASE_URL}/api/jobs/${id}`);
       setJobs((prevJobs) => prevJobs.filter((job) => job._id !== id));
     } catch (error) {
       console.error('Failed to delete job:', error);
-      alert('Failed to delete job. Please try again.'); // Вы можете добавить уведомление для пользователя
+      alert('Failed to delete job. Please try again.');
     }
   };
 
