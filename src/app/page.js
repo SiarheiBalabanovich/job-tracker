@@ -12,13 +12,19 @@ const HomePage = () => {
 
   useEffect(() => {
     // Загрузка списка вакансий
-    axios.get('/api/jobs').then((response) => setJobs(response.data));
+    axios.get('/api/jobs')
+      .then((response) => setJobs(response.data))
+      .catch((error) => console.error('Failed to fetch jobs:', error));
   }, []);
 
-  const handleSave = () => {
-    // Обновление списка вакансий
-    axios.get('/api/jobs').then((response) => setJobs(response.data));
-    setCurrentJob(null);
+  const handleSave = async () => {
+    try {
+      const response = await axios.get('/api/jobs');
+      setJobs(response.data);
+      setCurrentJob(null);
+    } catch (error) {
+      console.error('Failed to fetch jobs:', error);
+    }
   };
 
   const handleEdit = (job) => {
@@ -36,7 +42,7 @@ const HomePage = () => {
         <JobForm job={currentJob} onSave={handleSave} onCancel={handleCancel} />
       ) : (
         <>
-          <button className={styles.addButton} onClick={() => setCurrentJob({})}>
+          <button className={styles.addButton} onClick={() => setCurrentJob({ company: '', position: '', salaryRange: '', status: '', notes: '' })}>
             + Add New Job
           </button>
           <JobTable jobs={jobs} onEdit={handleEdit} />

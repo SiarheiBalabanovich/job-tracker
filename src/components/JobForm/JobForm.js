@@ -34,7 +34,7 @@ const JobForm = ({ job = {}, onSave, onCancel }) => {
       }
       onSave();
     } catch (error) {
-      console.error('Failed to save job:', error);
+      console.error('Failed to save job:', error.response ? error.response.data : error.message);
       setError('Failed to save job. Please try again.');
     }
   };

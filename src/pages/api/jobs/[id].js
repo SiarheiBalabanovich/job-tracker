@@ -1,4 +1,3 @@
-import mongoose from 'mongoose';
 import Job from '../../../../models/Job';
 
 export default async function handler(req, res) {
@@ -18,7 +17,7 @@ export default async function handler(req, res) {
             if (!deletedJob) {
                 res.status(404).json({ error: 'Job not found' });
             } else {
-                res.status(204).end();
+                res.status(200).json({ message: 'Job deleted' });
             }
         } else {
             res.setHeader('Allow', ['PUT', 'DELETE']);

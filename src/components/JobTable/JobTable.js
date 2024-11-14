@@ -6,13 +6,25 @@ const JobTable = ({ onEdit }) => {
   const [jobs, setJobs] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/jobs').then(response => setJobs(response.data));
+    const fetchJobs = async () => {
+      try {
+        const response = await axios.get('/api/jobs');
+        setJobs(response.data);
+      } catch (error) {
+        console.error('Failed to fetch jobs:', error);
+      }
+    };
+    fetchJobs();
   }, []);
 
-  const deleteJob = (id) => {
-    axios.delete(`/api/jobs/${id}`).then(() => {
-      setJobs(jobs.filter(job => job._id !== id));
-    });
+  const deleteJob = async (id) => {
+    try {
+      await axios.delete(`/api/jobs/${id}`);
+      setJobs((prevJobs) => prevJobs.filter((job) => job._id !== id));
+    } catch (error) {
+      console.error('Failed to delete job:', error);
+      alert('Failed to delete job. Please try again.'); // Вы можете добавить уведомление для пользователя
+    }
   };
 
   return (
@@ -29,7 +41,7 @@ const JobTable = ({ onEdit }) => {
           </tr>
         </thead>
         <tbody>
-          {jobs.map(job => (
+          {jobs.map((job) => (
             <tr key={job._id}>
               <td className={styles.cell}>{job.company}</td>
               <td className={styles.cell}>{job.position}</td>
