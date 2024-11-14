@@ -6,20 +6,22 @@ import JobForm from '../components/JobForm/JobForm';
 import axios from 'axios';
 import styles from './page.module.css';
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
 const HomePage = () => {
   const [jobs, setJobs] = useState([]);
   const [currentJob, setCurrentJob] = useState(null);
 
   useEffect(() => {
     // Загрузка списка вакансий
-    axios.get('/api/jobs')
+    axios.get(`${API_BASE_URL}/api/jobs`)
       .then((response) => setJobs(response.data))
       .catch((error) => console.error('Failed to fetch jobs:', error));
   }, []);
 
   const handleSave = async () => {
     try {
-      const response = await axios.get('/api/jobs');
+      const response = await axios.get(`${API_BASE_URL}/api/jobs`);
       setJobs(response.data);
       setCurrentJob(null);
     } catch (error) {
