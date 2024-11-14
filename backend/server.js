@@ -13,7 +13,7 @@ const router = new Router();
 app.use(cors({ origin: '*' }));
 app.use(bodyParser());
 
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect('mongodb+srv://sbaldeveloper:pGO8EA3j89blSOLj@cluster0.3bjrh.mongodb.net/?retryWrites=true&w=majority&connectTimeoutMS=30000&socketTimeoutMS=30000', {
   connectTimeoutMS: 30000,
   socketTimeoutMS: 30000,
 })
