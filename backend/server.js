@@ -9,7 +9,7 @@ const cors = require('@koa/cors');
 const app = new Koa();
 const router = new Router();
 
-app.use(cors());
+app.use(cors({ origin: 'https://job-tracker-production-dbb8.up.railway.app' }));
 
 app.use(bodyParser());
 
@@ -95,4 +95,4 @@ app.use(router.routes()).use(router.allowedMethods());
 
 const PORT = process.env.PORT || 4000;
 
-app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
