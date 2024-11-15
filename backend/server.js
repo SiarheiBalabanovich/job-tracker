@@ -93,6 +93,5 @@ router.delete('/api/jobs/:id', async (ctx) => {
 
 app.use(router.routes()).use(router.allowedMethods());
 
-const PORT = process.env.PORT || 4000;
-
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
