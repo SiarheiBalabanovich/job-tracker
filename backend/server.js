@@ -10,7 +10,8 @@ const cors = require('@koa/cors');
 const app = new Koa();
 const router = new Router();
 
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: 'https://job-tracker-production-dbb8.up.railway.app' }));
+
 app.use(bodyParser());
 
 mongoose.connect('mongodb+srv://sbaldeveloper:pGO8EA3j89blSOLj@cluster0.3bjrh.mongodb.net/?retryWrites=true&w=majority', {})
