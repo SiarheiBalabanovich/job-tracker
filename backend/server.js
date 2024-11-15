@@ -10,9 +10,9 @@ const app = new Koa();
 const router = new Router();
 
 app.use(cors({
-  origin: 'https://job-tracker-production-dbb8.up.railway.app', // Ограничение доступа с Railway
-  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Разрешенные методы
-  allowHeaders: ['Content-Type', 'Authorization'], // Разрешенные заголовки
+  origin: '*', // Временно разрешаем доступ из всех источников для отладки
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowHeaders: ['Content-Type', 'Authorization'],
 }));
 
 app.use(bodyParser());
