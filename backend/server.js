@@ -9,7 +9,11 @@ const cors = require('@koa/cors');
 const app = new Koa();
 const router = new Router();
 
-app.use(cors({ origin: 'https://job-tracker-production-dbb8.up.railway.app' }));
+app.use(cors({
+  origin: 'https://job-tracker-production-dbb8.up.railway.app', // Ограничение доступа с Railway
+  allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Разрешенные методы
+  allowHeaders: ['Content-Type', 'Authorization'], // Разрешенные заголовки
+}));
 
 app.use(bodyParser());
 
@@ -34,10 +38,10 @@ const jobSchema = new mongoose.Schema({
 
 const Job = mongoose.model('Job', jobSchema);
 
-// Получение списка работ с ограничением и использованием lean для оптимизации памяти
+// Получение списка работ
 router.get('/api/jobs', async (ctx) => {
   try {
-    const jobs = await Job.find().limit(10).lean(); // Ограничиваем количество записей до 10 и облегчаем данные
+    const jobs = await Job.find().limit(10).lean();
     ctx.body = jobs;
   } catch (error) {
     ctx.status = 500;
@@ -48,6 +52,8 @@ router.get('/api/jobs', async (ctx) => {
 
 // Создание новой записи
 router.post('/api/jobs', async (ctx) => {
+  console.log("Request Body:", JSON.stringify(ctx.request.body)); // Логирование тела запроса для отладки
+
   try {
     const newJob = new Job(ctx.request.body);
     await newJob.save();
@@ -63,7 +69,7 @@ router.post('/api/jobs', async (ctx) => {
 // Обновление записи по ID
 router.put('/api/jobs/:id', async (ctx) => {
   try {
-    const job = await Job.findByIdAndUpdate(ctx.params.id, ctx.request.body, { new: true }).lean(); // Добавляем lean для оптимизации
+    const job = await Job.findByIdAndUpdate(ctx.params.id, ctx.request.body, { new: true }).lean();
     if (!job) {
       ctx.status = 404;
       ctx.body = { message: 'Job not found' };
@@ -80,7 +86,7 @@ router.put('/api/jobs/:id', async (ctx) => {
 // Удаление записи по ID
 router.delete('/api/jobs/:id', async (ctx) => {
   try {
-    const job = await Job.findByIdAndDelete(ctx.params.id).lean(); // Добавляем lean для оптимизации
+    const job = await Job.findByIdAndDelete(ctx.params.id).lean();
     if (!job) {
       ctx.status = 404;
       ctx.body = { message: 'Job not found' };
