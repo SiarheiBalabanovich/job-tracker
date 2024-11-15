@@ -13,7 +13,10 @@ app.use(cors({ origin: 'https://job-tracker-production-dbb8.up.railway.app' }));
 
 app.use(bodyParser());
 
-mongoose.connect('mongodb+srv://sbaldeveloper:pGO8EA3j89blSOLj@cluster0.3bjrh.mongodb.net/?retryWrites=true&w=majority', {})
+mongoose.connect('mongodb+srv://sbaldeveloper:pGO8EA3j89blSOLj@cluster0.3bjrh.mongodb.net/?retryWrites=true&w=majority', {
+  connectTimeoutMS: 30000,
+  socketTimeoutMS: 30000
+})
   .then(() => {
     console.log('Connected to MongoDB');
   })
