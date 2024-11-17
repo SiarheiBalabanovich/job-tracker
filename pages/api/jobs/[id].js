@@ -2,6 +2,8 @@ import { connectToDatabase } from '../../../lib/mongodb';
 import Job from '../../../models/Job';
 
 export default async function handler(req, res) {
+  console.log(`Received request: ${req.method} /api/jobs/${req.query.id}`);
+  console.log('Request body:', req.body);
   await connectToDatabase(); // Подключаемся к базе данных
   
   const { method } = req;
