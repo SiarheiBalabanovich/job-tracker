@@ -28,7 +28,7 @@ const JobTable = ({ onEdit }) => {
   };
 
   return (
-    <div className={styles.tableContainer}>
+    <div className={styles.tableWrapper}>
       <table className={styles.table}>
         <thead>
           <tr>

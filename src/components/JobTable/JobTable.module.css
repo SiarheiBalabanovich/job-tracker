@@ -3,10 +3,13 @@
     max-width: 800px;
     padding: 20px;
     text-align: center;
+    overflow-x: auto; /* Добавляет горизонтальную прокрутку */
+    -webkit-overflow-scrolling: touch; /* Плавная прокрутка для iOS */
 }
 
 .table {
     width: 100%;
+    min-width: 600px; /* Минимальная ширина таблицы для горизонтальной прокрутки */
     border-collapse: collapse;
 }
 
@@ -19,6 +22,10 @@
 .headerCell {
     background-color: #f2f2f2;
     font-weight: bold;
+}
+
+.cell {
+    background-color: #ffffff; /* Убедимся, что ячейки остаются белыми */
 }
 
 .button {
