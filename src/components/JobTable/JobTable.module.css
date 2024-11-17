@@ -1,15 +1,14 @@
 .tableContainer {
     margin: 20px auto;
-    max-width: 800px;
+    max-width: 100%; /* Ограничиваем контейнер */
     padding: 20px;
     text-align: center;
-    overflow-x: auto; /* Добавляет горизонтальную прокрутку */
-    -webkit-overflow-scrolling: touch; /* Плавная прокрутка для iOS */
+    overflow-x: auto; /* Добавляем горизонтальную прокрутку */
+    -webkit-overflow-scrolling: touch; /* Плавная прокрутка на мобильных устройствах */
 }
 
 .table {
     width: 100%;
-    min-width: 600px; /* Минимальная ширина таблицы для горизонтальной прокрутки */
     border-collapse: collapse;
 }
 
@@ -25,7 +24,7 @@
 }
 
 .cell {
-    background-color: #ffffff; /* Убедимся, что ячейки остаются белыми */
+    background-color: #ffffff;
 }
 
 .button {
@@ -46,37 +45,27 @@
     background-color: #003f7f;
 }
 
-/* Медиазапросы для мобильных экранов */
+/* Медиазапросы для оптимизации текста и кнопок на мобильных устройствах */
 @media (max-width: 768px) {
-    .table {
-        min-width: unset; /* Убираем фиксированную минимальную ширину на меньших экранах */
-        width: 100%; /* Таблица адаптируется к ширине контейнера */
-    }
-
     .headerCell, .cell {
-        font-size: 12px; /* Уменьшаем размер текста */
-        padding: 8px; /* Уменьшаем отступы */
+        font-size: 12px;
+        padding: 8px;
     }
 
     .button {
-        padding: 5px 10px; /* Уменьшаем размеры кнопок */
+        padding: 5px 10px;
         font-size: 12px;
     }
 }
 
 @media (max-width: 480px) {
-    .tableContainer {
-        padding: 10px; /* Уменьшаем отступы для контейнера */
-    }
-
     .headerCell, .cell {
-        font-size: 10px; /* Ещё уменьшаем размер текста для очень маленьких экранов */
-        padding: 6px; /* Ещё меньше отступы */
+        font-size: 10px;
+        padding: 6px;
     }
 
     .button {
-        margin: 3px;
-        padding: 4px 8px; /* Ещё меньше размеры кнопок */
+        padding: 4px 8px;
         font-size: 10px;
     }
 }
