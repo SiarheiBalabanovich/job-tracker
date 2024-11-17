@@ -5,24 +5,19 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "NODE_ENV=production npm install --omit=dev && next start",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@koa/cors": "^5.0.0",
     "axios": "^1.7.7",
-    "body-parser": "^1.20.3",
     "dotenv": "^16.4.5",
-    "koa": "^2.15.3",
-    "koa-bodyparser": "^4.4.1",
-    "koa-router": "^13.0.1",
     "mongoose": "^8.8.1",
     "next": "15.0.3",
-    "react": "19.0.0-rc-66855b96-20241106",
-    "react-dom": "19.0.0-rc-66855b96-20241106"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "eslint": "^8",
-    "eslint-config-next": "15.0.3"
+    "eslint": "^9.15.0",
+    "eslint-config-next": "^15.0.3"
   }
 }

@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './JobForm.module.css';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
-
 const JobForm = ({ job = {}, onSave, onCancel }) => {
   const [company, setCompany] = useState(job.company || '');
   const [position, setPosition] = useState(job.position || '');
@@ -29,10 +27,10 @@ const JobForm = ({ job = {}, onSave, onCancel }) => {
     try {
       if (job._id) {
         // Обновление существующей записи
-        await axios.put(`${API_BASE_URL}/api/jobs/${job._id}`, jobData);
+        await axios.put(`/api/jobs/${job._id}`, jobData);
       } else {
         // Создание новой записи
-        await axios.post(`${API_BASE_URL}/api/jobs`, jobData);
+        await axios.post('/api/jobs', jobData);
       }
       onSave();
     } catch (error) {
