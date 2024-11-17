@@ -1,10 +1,10 @@
 .tableContainer {
     margin: 20px auto;
-    max-width: 100%; /* Ограничиваем контейнер */
+    max-width: 100%;
     padding: 20px;
     text-align: center;
-    overflow-x: auto; /* Добавляем горизонтальную прокрутку */
-    -webkit-overflow-scrolling: touch; /* Плавная прокрутка на мобильных устройствах */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .table {
@@ -45,7 +45,6 @@
     background-color: #003f7f;
 }
 
-/* Медиазапросы для оптимизации текста и кнопок на мобильных устройствах */
 @media (max-width: 768px) {
     .headerCell, .cell {
         font-size: 12px;

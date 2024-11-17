@@ -11,7 +11,7 @@ const HomePage = () => {
   const [currentJob, setCurrentJob] = useState(null);
 
   useEffect(() => {
-    // Загрузка списка вакансий
+
     axios.get('/api/jobs')
       .then((response) => setJobs(response.data))
       .catch((error) => console.error('Failed to fetch jobs:', error));

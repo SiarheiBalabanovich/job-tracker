@@ -28,12 +28,10 @@ const JobForm = ({ job = {}, onSave, onCancel }) => {
       if (job._id) {
         console.log(`Updating job at /api/jobs/${job._id}`, jobData);
 
-        // Обновление существующей записи
         await axios.put(`/api/jobs/${job._id}`, jobData);
       } else {
         console.log('Creating job at /api/jobs', jobData);
 
-        // Создание новой записи
         await axios.post('/api/jobs', jobData);
       }
       onSave();
