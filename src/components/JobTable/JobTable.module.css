@@ -45,3 +45,38 @@
 .button:active {
     background-color: #003f7f;
 }
+
+/* Медиазапросы для мобильных экранов */
+@media (max-width: 768px) {
+    .table {
+        min-width: unset; /* Убираем фиксированную минимальную ширину на меньших экранах */
+        width: 100%; /* Таблица адаптируется к ширине контейнера */
+    }
+
+    .headerCell, .cell {
+        font-size: 12px; /* Уменьшаем размер текста */
+        padding: 8px; /* Уменьшаем отступы */
+    }
+
+    .button {
+        padding: 5px 10px; /* Уменьшаем размеры кнопок */
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .tableContainer {
+        padding: 10px; /* Уменьшаем отступы для контейнера */
+    }
+
+    .headerCell, .cell {
+        font-size: 10px; /* Ещё уменьшаем размер текста для очень маленьких экранов */
+        padding: 6px; /* Ещё меньше отступы */
+    }
+
+    .button {
+        margin: 3px;
+        padding: 4px 8px; /* Ещё меньше размеры кнопок */
+        font-size: 10px;
+    }
+}
