@@ -19,7 +19,7 @@
 * MongoDB is used as the database to store job data.
   
 ## 3. Deployment:
-*Successfully deployed on Vercel, ensuring stability and fast load times.
+* Successfully deployed on Vercel, ensuring stability and fast load times.
 
 ## Tasks Accomplished:
 * Database Integration: Successfully configured a secure and stable connection to MongoDB.
