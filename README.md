@@ -1,5 +1,5 @@
 ## Overview:
-# This is a full-stack job tracking application developed as a way to challenge myself and expand my skills in both frontend and backend development. The project showcases my ability to build a fully functional application, including client and server components.
+## This is a full-stack job tracking application developed as a way to challenge myself and expand my skills in both frontend and backend development. The project showcases my ability to build a fully functional application, including client and server components.
 
 ## Key Features:
 1. Job Management: Ability to add, edit, view, and delete job listings.
