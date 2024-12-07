@@ -41,5 +41,5 @@ This project demonstrates:
 * Skills in implementing functional solutions for data management.
 
 ## Links:
-* GitHub Repository: Project Repository (Add the actual link if the project is public).
-* Live Demo: Job Tracker App.
+* Project https://job-tracker-two.vercel.app/
+* Live Demo: Job Tracker App https://job-tracker-two.vercel.app/
