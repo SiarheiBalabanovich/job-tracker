@@ -18,7 +18,7 @@
 * Developed with Node.js, using Express or Koa to handle API requests.
 * MongoDB is used as the database to store job data.
   
-## 3.Deployment:
+## 3. Deployment:
 *Successfully deployed on Vercel, ensuring stability and fast load times.
 
 ## Tasks Accomplished:
